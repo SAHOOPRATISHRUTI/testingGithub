@@ -13,8 +13,14 @@ const userSchema = new mongoose.Schema({
         message: "{VALUE} is not a valid email",
       },
       default: null,
+      unique:true,
       required: true,
       index: true,
+    },
+    phone:{
+      type:String,
+      required:true,
+      unique:true
     },
     profilePicture: { 
         type: String,
@@ -23,6 +29,28 @@ const userSchema = new mongoose.Schema({
     password :{
         type:String,
         required:true
+    },
+    //OTP 
+    otp:{
+      type:String,
+      default:null,
+    },
+    otpExpiry:{
+      type:Date,
+      default:null
+    },
+    otpResendCount:{
+      type:Number,
+      default:0
+    },
+    isVerified:{
+      type:Boolean,
+      default:false,
+    },
+    //Google Auth
+    googleId:{
+      type:String,
+      default:null
     }
 
 },{timestamps:true})
