@@ -36,5 +36,5 @@ const otpLogSchema = new mongoose.Schema({
       index: true,
     },
 },{timestamps:true})
-const otpLogs = mongoose.model("otpLogs", otpLogsSchema);
+const otpLogs = mongoose.model("otpLogs", otpLogSchema);
 module.exports = otpLogs;

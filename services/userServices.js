@@ -2,7 +2,7 @@ const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 const jwt =require("jsonwebtoken")
 const {sendEmail} = require("./emailService");
-
+const OtpLogs = require("../models/otpLogsModel")
 const verifyEmail = async(email)=>{
     console.log("email =======",email)
     return await User.findOne(
@@ -19,6 +19,16 @@ const generateToken = (userId)=>{
 const checkResendOtpRules = async(userData)=>{
     const otpLogsData = await OtpLogs.findOne({email:userData.email}).sort({createdAt:-1});
     console.log("otpLogsData======>",otpLogsData)
+    if(otpLogsData){
+        let otpResendTime=otpLogsData.otpResendTime;
+        let otpResendCount = otpLogsData.otpResendCount
+        if(otpResendTime){
+            const timeDifference = commonHelper.checkTimeDifference(
+                new Date(),
+                otpResendTime
+            )
+        }
+    }
 }
 
 const validateSendingOtp = async (userData,email)=>{
