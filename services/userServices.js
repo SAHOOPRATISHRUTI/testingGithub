@@ -16,6 +16,11 @@ const generateToken = (userId)=>{
     return jwt.sign({id:userId},process.env.JWT.SECRET,{expiresIn:"1d"})
 }
 
+const checkResendOtpRules = async(userData)=>{
+    const otpLogsData = await OtpLogs.findOne({email:userData.email}).sort({createdAt:-1});
+    console.log("otpLogsData======>",otpLogsData)
+}
+
 const validateSendingOtp = async (userData,email)=>{
     let otpResendTime;
     let otpResendCount;
